@@ -20,11 +20,21 @@ class Solution {
             set.add(num);
         }
 
-        for (int num : set) {
-            if (set.contains(num)) {
-
+        int ans = 0;
+        for (int cur : set) {
+            // 如果有比它小的数, 不做判断, 等遇到更小的数时再判断
+            if (!set.contains(cur - 1)) {
+                int curNum = cur;
+                int count = 1;
+                // 递增算连续个数
+                while (set.contains(curNum + 1)) {
+                    curNum++;
+                    count++;
+                }
+                ans = Math.max(ans, count);
             }
         }
+        return ans;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

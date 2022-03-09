@@ -1,7 +1,6 @@
 package leetcode.editor.cn.Stack;
 
 import leetcode.editor.cn.custom.TreeNode;
-import org.junit.Test;
 
 import java.util.Stack;
 
@@ -60,12 +59,4 @@ class BSTIterator {
  * boolean param_2 = obj.hasNext();
  */
 //leetcode submit region end(Prohibit modification and deletion)
-
-    @Test
-    public void test() {
-    
-    
-        Solution solution = new Solution();
-        System.out.println();
-    }
 }

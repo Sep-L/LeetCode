@@ -1,7 +1,5 @@
 package leetcode.editor.cn.Stack;
 
-import org.junit.Test;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -67,11 +65,4 @@ class StackOfPlates {
  */
 //leetcode submit region end(Prohibit modification and deletion)
 
-    @Test
-    public void test() {
-    
-    
-        Solution solution = new Solution();
-        System.out.println();
-    }
 }
