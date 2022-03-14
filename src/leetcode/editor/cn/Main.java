@@ -1,59 +1,58 @@
 package leetcode.editor.cn;
 
+import org.junit.Test;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * @author LQZ
  * @date 2022-03-03 9:23
  */
 
 public class Main {
-    // 数组, 表示并查集所有元素
-    private int[] parent;
-    // 并查集的元素个数
-    private int size;
 
-    public Main(int size) {
-        // 用给定的 size 初始化一个数组
-        this.size = size;
-        parent = new int[size];
-        // 初始时数组内的值与数组的下角标一致, 即每个数字单独为一组
-        for (int i = 0; i < size; i++) {
-            parent[i] = i;
+    private Deque<Integer> stack;
+    private int ans = 0;
+    private final int PUSH = 1;
+    private final int POP = 0;
+    private int n;
+
+    public int maximumTop(int[] nums, int k) {
+        n = nums.length;
+        if (n == 1) {
+            return -1;
         }
+        stack = new ArrayDeque<>();
+
+        for (int i = n - 1; i >= 0; i--) {
+            stack.push(nums[i]);
+        }
+        back(POP, k % (2 * n));
+        return ans;
     }
 
-    /**
-     * 查看元素属于哪个集合
-     */
-    public int find(int element) {
-        // 不相等, 说明当前元素有上一级的父节点
-        // 循环找到最上级的父节点
-        while (element != parent[element]) {
-            element = parent[element];
+    private void back(int flag, int k) {
+        if (stack.isEmpty()) {
+            return;
         }
-        // 返回最终父节点属于的集合
-        return parent[element];
-    }
-
-    /**
-     * 判断两个元素是否同属于一个集合
-     */
-    public boolean isConnected(int firstElement, int secondElement) {
-        return find(firstElement) == find(secondElement);
-    }
-
-    /**
-     * 合并两个元素所在的集合
-     */
-    public void union(int firstElement, int secondElement) {
-        //找出 firstElement 的最终父节点
-        int firstRoot = find(firstElement);
-        //找出 secondElement 的最终父节点
-        int secondRoot = find(secondElement);
-
-        //如果这两个不是同一个集合, 那么合并.
-        if (firstRoot != secondRoot) {
-            // 修改 firstRoot 使它的上级父节点是 secondRoot
-            parent[firstRoot] = secondRoot;
+        if (k == 0) {
+            ans = Math.max(ans, stack.peek());
+            return;
         }
+        if (flag == POP) {
+            int num = stack.pop();
+            back(POP, k - 1);
+            stack.push(num);
+        }
+        back(PUSH, k - 1);
+    }
+    @Test
+    public void test() {
+        Main solution = new Main();
+        int[] arr = new int[]{94,23,58,92,3,63,68,43,8,97,54,11,63,55,73,38,22,80,45,43,25,34,67,76,80,9,30,27,50,7,57,63,63,27,46,1,50,55,99,92,73,9,57,25,59,54,100,56,64,94,99};
+        int i = solution.maximumTop(arr, 79);
+        System.out.println(i);
     }
 }
+
