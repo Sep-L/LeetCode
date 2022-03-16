@@ -1,4 +1,4 @@
-package leetcode.editor.cn;
+package leetcode.editor.cn.UnionFind_in;
 import org.junit.Test;
 
 import java.util.HashMap;
