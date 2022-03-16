@@ -1,8 +1,8 @@
 package leetcode.editor.cn;
+
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * @author LQZ
@@ -15,28 +15,27 @@ public class ID455_AssignCookies{
 class Solution {
     public int findContentChildren(int[] g, int[] s) {
 
-        Arrays.sort(g, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1 - o2;
+        Arrays.sort(g);
+        Arrays.sort(s);
+
+        int children = 0, cookie = 0;
+        while (children < g.length && cookie < s.length) {
+            if (g[children] <= s[cookie]) {
+                children++;
             }
-        });
-        // Arrays.sort(s);
-        // int ans = 0;
-        // int index = 0;
-        // while (ans < s.length) {
-            // if (g[index])
-        // }
-        return 0;
+            cookie++;
+        }
+        return children;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
     @Test
     public void test() {
-    
+        int[] g = new int[]{1,2,3};
+        int[] s = new int[]{1,1};
     
         Solution solution = new Solution();
-        System.out.println();
+        System.out.println(solution.findContentChildren(g, s));
     }
 }
